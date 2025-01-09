@@ -34,7 +34,8 @@ Each time you run the GitHub Action, the workflow will:
 
 ## DAV0S | Graphene
 
-- ["Oryx with Custom QOM", blog post by Pierre Poulain (ZSA.io)](https://blog.zsa.io/oryx-custom-qmk-features/)
+- [Oryx layout](https://configure.zsa.io/voyager/layouts/VPOgj/latest/0)
+- ["Oryx + Custom QMK", blog post by Pierre Poulain (ZSA.io)](https://blog.zsa.io/oryx-custom-qmk-features/)
 - [Oryx with Custom QMK (Github)](https://github.com/poulainpi/oryx-with-custom-qmk)
 - [Repeat Key (QMK Docs)](https://docs.qmk.fm/features/repeat_key)
 - [Key Override (QMK Docs)](https://docs.qmk.fm/features/key_overrides)

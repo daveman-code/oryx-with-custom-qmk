@@ -31,3 +31,13 @@ Each time you run the GitHub Action, the workflow will:
 6. To build the firmware (including both Oryx and code modifications), rerun the GitHub Action. The firmware will be available for download in the action’s artifacts.
 7. Flash your downloaded firmware using [Keymapp](https://www.zsa.io/flash#flash-keymap).
 8. Enjoy!
+
+## DAV0S | Graphene
+
+- ["Oryx with Custom QOM", blog post by Pierre Poulain (ZSA.io)](https://blog.zsa.io/oryx-custom-qmk-features/)
+- [Oryx with Custom QMK (Github)](https://github.com/poulainpi/oryx-with-custom-qmk)
+- [Repeat Key (QMK Docs)](https://docs.qmk.fm/features/repeat_key)
+- [Key Override (QMK Docs)](https://docs.qmk.fm/features/key_overrides)
+- [Custom Shift Keys (Getreuer)](https://getreuer.info/posts/keyboards/custom-shift-keys/index.html)
+- [Achordion (Getreuer)](https://getreuer.info/posts/keyboards/achordion/index.html)
+- [Simultaneous Opposing Cardinal Directions filtering (Getreuer)](https://getreuer.info/posts/keyboards/socd-cleaner/index.html)

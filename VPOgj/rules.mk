@@ -9,6 +9,7 @@ SPACE_CADET_ENABLE = no
 COMBO_ENABLE = yes
 LAYER_LOCK_ENABLE = yes
 REPEAT_KEY_ENABLE = yes
+CAPS_WORD_ENABLE = yes
 SRC += features/custom_shift_keys.c
 SRC += features/select_word.c
 src += features/sentence_case.c

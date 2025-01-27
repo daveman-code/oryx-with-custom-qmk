@@ -178,7 +178,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Getreuer Sentence Case (DVM lock key)
     case CK_SENTENCE_CASE:
       if (record->event.pressed) {
-        sentence_case_toggle()
+        sentence_case_toggle();
       }
 
     return false;

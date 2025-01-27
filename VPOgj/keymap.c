@@ -10,7 +10,7 @@ const custom_shift_key_t custom_shift_keys[] = {
     {LT(5,KC_SLASH), KC_COLON}, // Shift / is :
     {KC_BACKSPACE, KC_DELETE}, // Shift Backspace is Delete
 };
-unint8_t NUM_CUSTOM_SHIFT_KEYS =
+uint8_t NUM_CUSTOM_SHIFT_KEYS =
     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
 // Getreuer Select word

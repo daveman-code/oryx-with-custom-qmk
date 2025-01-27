@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [3] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,            KC_NO,          KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_NO,          KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_NO,                                          KC_NO,          KC_NUM,         KC_PSCR,        KC_SCRL,          KC_PAUSE,       KC_TRANSPARENT, 
-    KC_TRANSPARENT, MT(MOD_LGUI, KC_KP_0),MT(MOD_LALT, KC_KP_4),MT(MOD_LSFT, KC_KP_5),MT(MOD_LCTL, KC_KP_6),KC_NO,                  KC_NO,          KC_REPEAT_KEY,  CK_SELECT_WORD, CK_SENTENCE_CASE, KC_RIGHT_GUI,   KC_TRANSPARENT,
+    KC_TRANSPARENT, MT(MOD_LGUI, KC_KP_0),MT(MOD_LALT, KC_KP_4),MT(MOD_LSFT, KC_KP_5),MT(MOD_LCTL, KC_KP_6),KC_NO,                  KC_NO,          QK_REPEAT_KEY,  CK_SELECT_WORD, CK_SENTENCE_CASE, KC_RIGHT_GUI,   KC_TRANSPARENT,
     KC_TRANSPARENT, KC_NO,          KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,            KC_NO,          KC_TRANSPARENT, 
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 QK_LLCK,        KC_TRANSPARENT
   ),

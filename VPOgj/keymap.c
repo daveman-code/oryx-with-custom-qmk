@@ -16,8 +16,8 @@ uint8_t NUM_CUSTOM_SHIFT_KEYS =
 // Getreuer Select word
 #include "features/select_word.h"
 
-// Getreuer Sentence case
-#include "features/sentence_case.h"
+//// Getreuer Sentence case
+//#include "features/sentence_case.h"
 
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
@@ -166,8 +166,8 @@ bool rgb_matrix_indicators_user(void) {
 uint16_t SELECT_WORD_KEYCODE = CK_SELECT_WORD;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  // Getreuer Sentence Case
-  if (!process_sentence_case(keycode, record)) { return false; }
+  //// Getreuer Sentence Case
+  //if (!process_sentence_case(keycode, record)) { return false; }
 
   // Getreuer Select Word
   if (!process_select_word(keycode, record)) { return false; }

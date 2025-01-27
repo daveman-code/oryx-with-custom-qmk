@@ -22,7 +22,7 @@ uint8_t NUM_CUSTOM_SHIFT_KEYS =
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
   ST_MACRO_0,
-  //CK_SENTENCE_CASE,
+  CK_SENTENCE_CASE_TOGGLE,
   CK_SELECT_WORD,
 };
 
@@ -58,10 +58,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 QK_LLCK,        KC_KP_ENTER
   ),
   [3] = LAYOUT_voyager(
-    KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,            KC_NO,               KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_NO,          KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_NO,                                          KC_NO,          KC_NUM,         KC_PSCR,        KC_SCRL,          KC_PAUSE,            KC_TRANSPARENT, 
-    KC_TRANSPARENT, MT(MOD_LGUI, KC_KP_0),MT(MOD_LALT, KC_KP_4),MT(MOD_LSFT, KC_KP_5),MT(MOD_LCTL, KC_KP_6),KC_NO,                  KC_NO,          QK_REPEAT_KEY,  CK_SELECT_WORD, KC_NO,            QK_CAPS_WORD_TOGGLE, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_NO,          KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,            KC_NO,               KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,                   KC_NO,               KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_NO,          KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_NO,                                          KC_NO,          KC_NUM,         KC_PSCR,        KC_SCRL,                 KC_PAUSE,            KC_TRANSPARENT, 
+    KC_TRANSPARENT, MT(MOD_LGUI, KC_KP_0),MT(MOD_LALT, KC_KP_4),MT(MOD_LSFT, KC_KP_5),MT(MOD_LCTL, KC_KP_6),KC_NO,                  KC_NO,          QK_REPEAT_KEY,  CK_SELECT_WORD, CK_SENTENCE_CASE_TOGGLE, QK_CAPS_WORD_TOGGLE, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_NO,          KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,                   KC_NO,               KC_TRANSPARENT, 
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 QK_LLCK,        KC_TRANSPARENT
   ),
   [4] = LAYOUT_voyager(
@@ -186,11 +186,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
 
     // Getreuer Sentence Case (DVM lock key)
-    // case CK_SENTENCE_CASE:
-    //   if (record->event.pressed) {
-    //     sentence_case_toggle();
-    //   }
-    // return false;
+    case CK_SENTENCE_CASE:
+      if (record->event.pressed) {
+       sentence_case_toggle();
+      }
+    return false;
 
   } // switch(keycode)
   return true;

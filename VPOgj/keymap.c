@@ -13,7 +13,6 @@ const custom_shift_key_t custom_shift_keys[] = {
 
 // Getreuer Select word
 #include "features/select_word.h"
-const uint16_t SELECT_WORD_KEYCODE = CK_SELECT_WORD;
 
 // Getreuer Sentence case
 #include "features/sentence_case.h"
@@ -162,6 +161,8 @@ bool rgb_matrix_indicators_user(void) {
   return true;
 }
 
+uint16_t SELECT_WORD_KEYCODE = CK_SELECT_WORD;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case ST_MACRO_0:
@@ -176,10 +177,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
 
     // Getreuer Sentence Case (DVM lock key)
-    case CK_SENTENCE_CASE:
-      if (record->event.pressed) {
-        sentence_case_toggle();
-      }
+    // case CK_SENTENCE_CASE:
+    //   if (record->event.pressed) {
+    //     sentence_case_toggle();
+    //   }
 
     return false;
   }

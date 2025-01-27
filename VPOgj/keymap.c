@@ -9,7 +9,9 @@ const custom_shift_key_t custom_shift_keys[] = {
     {LT(3,KC_DOT), KC_COMMA}, // Shift . is ,
     {LT(5,KC_SLASH), KC_COLON}, // Shift / is :
     {KC_BACKSPACE, KC_DELETE}, // Shift Backspace is Delete
-}
+};
+unint8_t NUM_CUSTOM_SHIFT_KEYS =
+    sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
 // Getreuer Select word
 #include "features/select_word.h"
@@ -164,6 +166,12 @@ bool rgb_matrix_indicators_user(void) {
 uint16_t SELECT_WORD_KEYCODE = CK_SELECT_WORD;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // Getreuer Sentence Case
+  if (!process_sentence_case(keycode, record)) { return false; }
+
+  // Getreuer Select Word
+  if (!process_select_word(keycode, record)) { return false; }
+
   switch (keycode) {
     case ST_MACRO_0:
       if (record->event.pressed) {
@@ -175,22 +183,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         rgblight_mode(1);
       }
+    return false;
 
     // Getreuer Sentence Case (DVM lock key)
     // case CK_SENTENCE_CASE:
     //   if (record->event.pressed) {
     //     sentence_case_toggle();
     //   }
+    // return false;
 
-    return false;
-  }
-
-  // Getreuer Sentence Case
-  if (!process_sentence_case(keycode, record)) { return false; }
-
-  // Getreuer Select Word
-  if (!process_select_word(keycode, record)) { return false; }
-
+  } // switch(keycode)
   return true;
 }
 

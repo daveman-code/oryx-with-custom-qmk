@@ -11,14 +11,17 @@ const custom_shift_key_t custom_shift_keys[] = {
     {KC_BACKSPACE, KC_DELETE}, // Shift Backspace is Delete
 }
 
-
 // Getreuer Select word
 #include "features/select_word.h"
 const uint16_t SELECT_WORD_KEYCODE = CK_SELECT_WORD;
 
+// Getreuer Sentence case
+#include "features/sentence_case.h"
+
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
   ST_MACRO_0,
+  CK_SENTENCE_CASE = SAFE_RANGE
   CK_SELECT_WORD = SAFE_RANGE,
 };
 
@@ -54,10 +57,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 QK_LLCK,        KC_KP_ENTER
   ),
   [3] = LAYOUT_voyager(
-    KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_NO,          KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_NO,                                          KC_NO,          KC_NUM,         KC_PSCR,        KC_SCRL,        KC_PAUSE,       KC_TRANSPARENT, 
-    KC_TRANSPARENT, MT(MOD_LGUI, KC_KP_0),MT(MOD_LALT, KC_KP_4),MT(MOD_LSFT, KC_KP_5),MT(MOD_LCTL, KC_KP_6),KC_NO,                  KC_NO,          KC_REPEAT_KEY,  CK_SELECT_WORD, KC_RIGHT_ALT,   KC_RIGHT_GUI,   KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_NO,          KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,            KC_NO,          KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_NO,          KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_NO,                                          KC_NO,          KC_NUM,         KC_PSCR,        KC_SCRL,          KC_PAUSE,       KC_TRANSPARENT, 
+    KC_TRANSPARENT, MT(MOD_LGUI, KC_KP_0),MT(MOD_LALT, KC_KP_4),MT(MOD_LSFT, KC_KP_5),MT(MOD_LCTL, KC_KP_6),KC_NO,                  KC_NO,          KC_REPEAT_KEY,  CK_SELECT_WORD, CK_SENTENCE_CASE, KC_RIGHT_GUI,   KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_NO,          KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,            KC_NO,          KC_TRANSPARENT, 
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 QK_LLCK,        KC_TRANSPARENT
   ),
   [4] = LAYOUT_voyager(
@@ -162,17 +165,27 @@ bool rgb_matrix_indicators_user(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case ST_MACRO_0:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LCTL(SS_TAP(X_C)) SS_DELAY(100) SS_LCTL(SS_TAP(X_T)) SS_DELAY(100) SS_LCTL(SS_TAP(X_V))  SS_DELAY(100) SS_TAP(X_ENTER));
-    }
-    break;
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL(SS_TAP(X_C)) SS_DELAY(100) SS_LCTL(SS_TAP(X_T)) SS_DELAY(100) SS_LCTL(SS_TAP(X_V))  SS_DELAY(100) SS_TAP(X_ENTER));
+      }
+      break;
 
     case RGB_SLD:
       if (record->event.pressed) {
         rgblight_mode(1);
       }
-      return false;
+
+    // Getreuer Sentence Case (DVM lock key)
+    case CK_SENTENCE_CASE:
+      if (record->event.pressed) {
+        sentence_case_toggle()
+      }
+
+    return false;
   }
+
+  // Getreuer Sentence Case
+  if (!process_sentence_case(keycode, record)) { return false; }
 
   // Getreuer Select Word
   if (!process_select_word(keycode, record)) { return false; }
@@ -180,6 +193,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
+// Getreuer Sentence Case: indicator LED on callback
+void sentence_case_primed(bool primed) {
+  // Change B0 to the pin for the LED to use.
+  writePin(B0, primed);
+}
 
 typedef struct {
     bool is_press_action;

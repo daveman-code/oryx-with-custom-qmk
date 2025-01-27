@@ -3,9 +3,23 @@
 #define MOON_LED_LEVEL LED_LEVEL
 #define ML_SAFE_RANGE SAFE_RANGE
 
+// Getreuer Custom shift keys
+#include "features/custom_shift_keys.h"
+const custom_shift_key_t custom_shift_keys[] = {
+    {LT(3,KC_DOT), KC_COMMA}, // Shift . is ,
+    {LT(5,KC_SLASH), KC_COLON}, // Shift / is :
+    {KC_BACKSPACE, KC_DELETE}, // Shift Backspace is Delete
+}
+
+
+// Getreuer Select word
+#include "features/select_word.h"
+const uint16_t SELECT_WORD_KEYCODE = CK_SELECT_WORD;
+
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
   ST_MACRO_0,
+  CK_SELECT_WORD = SAFE_RANGE,
 };
 
 
@@ -42,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [3] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_NO,          KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_NO,                                          KC_NO,          KC_NUM,         KC_PSCR,        KC_SCRL,        KC_PAUSE,       KC_TRANSPARENT, 
-    KC_TRANSPARENT, MT(MOD_LGUI, KC_KP_0),MT(MOD_LALT, KC_KP_4),MT(MOD_LSFT, KC_KP_5),MT(MOD_LCTL, KC_KP_6),KC_NO,                                          KC_NO,          KC_RIGHT_CTRL,  KC_RIGHT_SHIFT, KC_RIGHT_ALT,   KC_RIGHT_GUI,   KC_TRANSPARENT, 
+    KC_TRANSPARENT, MT(MOD_LGUI, KC_KP_0),MT(MOD_LALT, KC_KP_4),MT(MOD_LSFT, KC_KP_5),MT(MOD_LCTL, KC_KP_6),KC_NO,                  KC_NO,          KC_REPEAT_KEY,  CK_SELECT_WORD, KC_RIGHT_ALT,   KC_RIGHT_GUI,   KC_TRANSPARENT,
     KC_TRANSPARENT, KC_NO,          KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, 
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 QK_LLCK,        KC_TRANSPARENT
   ),
@@ -159,6 +173,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
   }
+
+  // Getreuer Select Word
+  if (!process_select_word(keycode, record)) { return false; }
+
   return true;
 }
 

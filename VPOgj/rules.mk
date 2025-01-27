@@ -8,3 +8,6 @@ TAP_DANCE_ENABLE = yes
 SPACE_CADET_ENABLE = no
 COMBO_ENABLE = yes
 LAYER_LOCK_ENABLE = yes
+REPEAT_KEY_ENABLE = yes
+SRC += features/custom_shift_keys.c
+SRC += features/select_word.c

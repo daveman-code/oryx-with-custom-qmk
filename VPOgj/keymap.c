@@ -3,6 +3,9 @@
 #define MOON_LED_LEVEL LED_LEVEL
 #define ML_SAFE_RANGE SAFE_RANGE
 
+//Getreuer Achordion
+#include "features/achordion.h"
+
 // Getreuer Custom shift keys
 #include "features/custom_shift_keys.h"
 const custom_shift_key_t custom_shift_keys[] = {
@@ -166,6 +169,9 @@ bool rgb_matrix_indicators_user(void) {
 uint16_t SELECT_WORD_KEYCODE = CK_SELECT_WORD;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // Getreuer Achordion
+  if (!process_achordion(keycode, record)) { return false; }
+
   // Getreuer Sentence Case
   if (!process_sentence_case(keycode, record)) { return false; }
 
@@ -186,7 +192,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
 
     // Getreuer Sentence Case (DVM lock key)
-    case CK_SENTENCE_CASE:
+    case CK_SENTENCE_CASE_TOGGLE:
       if (record->event.pressed) {
        sentence_case_toggle();
       }
@@ -194,6 +200,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   } // switch(keycode)
   return true;
+}
+
+void housekeeping_task_user(void) {
+  achordion_task();
 }
 
 // Getreuer Sentence Case: indicator LED on callback

@@ -22,7 +22,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,          KC_NO,          KC_NO,          KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,                                KC_AUDIO_VOL_DOWN,KC_AUDIO_MUTE,  KC_AUDIO_VOL_UP,KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_B,           KC_L,           KC_D,           KC_C,           KC_V,                                           KC_J,           KC_Y,           KC_O,           KC_U,           KC_BSPC,        KC_NO,          
     KC_NO,          MT(MOD_LGUI, KC_N),MT(MOD_LALT, KC_R),MT(MOD_LSFT, KC_T),MT(MOD_LCTL, KC_S),KC_G,                                           KC_P,           MT(MOD_RCTL, KC_H),MT(MOD_RSFT, KC_A),MT(MOD_RALT, KC_E),MT(MOD_RGUI, KC_I),KC_NO,          
-    KC_NO,          LT(4,KC_X),     LT(3,KC_Q),     LT(2,KC_M),     LT(1,KC_W),     KC_Z,                                           KC_K,           LT(1,KC_F),     LT(2,KC_MINUS), LT(3,KC_DOT),   LT(5,KC_SLASH), KC_NO,          
+    KC_NO,          LT(5,KC_X),     LT(3,KC_Q),     LT(2,KC_M),     LT(1,KC_W),     KC_Z,                                           KC_K,           LT(1,KC_F),     LT(2,KC_MINUS), LT(3,KC_DOT),   LT(4,KC_SLASH), KC_NO,          
                                                     KC_SPACE,       MEH_T(KC_TAB),                                  KC_ESCAPE,      KC_ENTER
   ),
   [1] = LAYOUT_voyager(

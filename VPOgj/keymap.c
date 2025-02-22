@@ -81,12 +81,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LEFT_CTRL,   KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_EQUAL,       
                                                     KC_LEFT_ALT,    KC_SPACE,                                       KC_ENTER,       KC_LEFT_GUI
   ),
+  [9] = LAYOUT_voyager(
+    KC_LEFT_GUI,    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_RIGHT_GUI,   
+    KC_LEFT_ALT,    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_RIGHT_ALT,   
+    KC_LEFT_SHIFT,  KC_N,           KC_R,           KC_T,           KC_S,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_H,           KC_A,           KC_E,           KC_I,           KC_UP,          
+    KC_LEFT_CTRL,   KC_X,           KC_Q,           KC_M,           KC_W,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_F,           KC_MINUS,       KC_DOT,         KC_SLASH,       KC_RIGHT_CTRL,  
+                                                    KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
+  ),
 };
 
-const uint16_t PROGMEM combo0[] = { KC_ENTER, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM combo0[] = { KC_BSPC, KC_ENTER, COMBO_END};
+const uint16_t PROGMEM combo1[] = { KC_RIGHT_GUI, KC_LEFT_GUI, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(combo0, TO(1)),
+    COMBO(combo0, TO(0)),
+    COMBO(combo1, TO(0)),
 };
 
 

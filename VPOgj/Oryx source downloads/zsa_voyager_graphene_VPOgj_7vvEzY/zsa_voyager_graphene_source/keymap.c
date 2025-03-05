@@ -3,31 +3,12 @@
 #define MOON_LED_LEVEL LED_LEVEL
 #define ML_SAFE_RANGE SAFE_RANGE
 
-// Getreuer Achordion
-#include "features/achordion.h"
-
-// Getreuer Custom shift keys
-#include "features/custom_shift_keys.h"
-const custom_shift_key_t custom_shift_keys[] = {
-    {LT(3, KC_DOT), KC_COMMA},   // Shift . is ,
-    {LT(4, KC_SLASH), KC_COLON}, // Shift / is :
-    {KC_BACKSPACE, KC_DELETE},   // Shift Backspace is Delete
-};
-uint8_t NUM_CUSTOM_SHIFT_KEYS =
-    sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
-
-// Getreuer Select word
-#include "features/select_word.h"
-
-// Getreuer Sentence case
-#include "features/sentence_case.h"
-
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
   ST_MACRO_0,
-  CK_SENTENCE_CASE_TOGGLE,
-  CK_SELECT_WORD,
 };
+
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -110,6 +91,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo1, TO(0)),
 };
 
+
 extern rgb_config_t rgb_matrix_config;
 
 void keyboard_post_init_user(void) {
@@ -117,7 +99,7 @@ void keyboard_post_init_user(void) {
 }
 
 const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
-    [4] = { {101,255,59}, {100,255,121}, {100,255,184}, {101,255,255}, {42,255,77}, {42,255,130}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {165,255,72}, {0,0,0}, {0,0,0} },
+    [4] = { {101,255,59}, {100,255,121}, {100,255,184}, {101,255,255}, {42,255,77}, {42,255,130}, {0,0,0}, {0,0,0}, {0,0,0}, {71,255,255}, {216,255,255}, {0,0,0}, {0,0,0}, {143,255,255}, {71,255,255}, {71,255,255}, {71,255,255}, {143,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {216,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {165,255,72}, {0,0,0}, {0,0,0} },
 
     [6] = { {41,255,117}, {196,255,255}, {0,255,117}, {196,255,255}, {68,255,60}, {81,255,255}, {41,255,117}, {226,255,255}, {152,255,255}, {226,255,255}, {68,255,135}, {49,255,255}, {41,255,117}, {152,255,255}, {152,255,255}, {152,255,255}, {68,255,135}, {27,255,255}, {135,255,255}, {227,255,117}, {226,255,255}, {227,255,117}, {68,255,60}, {12,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0} },
 
@@ -165,29 +147,7 @@ bool rgb_matrix_indicators_user(void) {
   return true;
 }
 
-uint16_t SELECT_WORD_KEYCODE = CK_SELECT_WORD;
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  // Getreuer Achordion
-  if (!process_achordion(keycode, record)) {
-    return false;
-  }
-
-  // Getreuer Sentence Case
-  if (!process_sentence_case(keycode, record)) {
-    return false;
-  }
-
-  // Getreuer Select Word
-  if (!process_select_word(keycode, record)) {
-    return false;
-  }
-
-  // Getreuer Custom Shift Keys
-  if (!process_custom_shift_keys(keycode, record)) {
-    return false;
-  }
-
   switch (keycode) {
     case ST_MACRO_0:
     if (record->event.pressed) {
@@ -204,10 +164,5 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-void housekeeping_task_user(void) { achordion_task(); }
 
-// Getreuer Sentence Case: indicator LED on callback
-void sentence_case_primed(bool primed) {
-  // Change B0 to the pin for the LED to use.
-  writePin(B0, primed);
-}
+
